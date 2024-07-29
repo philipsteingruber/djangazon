@@ -1,0 +1,26 @@
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1 {
+    margin-left: 1rem;
+}
+
+.item-image-preview {
+    box-sizing: inherit;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.items-list-container ul {
+    list-style-type: none;
+}

@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <h1>Welcome to Djangazon</h1>
+    <hr>
+    <div class="home-container">
+        <div>
+            {% include 'base/items_list_component.html' %}
+        </div>
+        <div>
+            {% include 'base/cart_component.html' %}
+        </div>
+    </div>
+{% endblock %}

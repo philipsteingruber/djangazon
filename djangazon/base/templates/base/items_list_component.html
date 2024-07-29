@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="items-list-container">
+        <ul>
+            {% for item in items %}
+                <span>{{ item.name.title }} - {{ item.price }}</span>
+                <p>{{ item.description }}</p>
+                <image src="{{ item.image.url }}" class="item-image-preview"></image>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -5,14 +5,19 @@ from django.db import models
 # Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=100)
-    price = models.FloatField()
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    price = models.FloatField(blank=False, null=False)
+    category = models.ManyToManyField('Category', blank=False)
+    description = models.TextField(blank=True)
+    image = models.ImageField(default='images/imagenotfound.jpg', blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Category(models.Model):
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=100)
 
     def __str__(self):

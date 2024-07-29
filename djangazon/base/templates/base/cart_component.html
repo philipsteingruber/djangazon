@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block content %}
+    <div>
+        <ul>
+            {% for item in items_in_cart %}
+                <li>{{ item }} - {{ item.price }}</li>
+                <a href="">Remove</a>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

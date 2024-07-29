@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{{% block title %}
+	{{ item }}
+{% endblock %}
+{{% block content %}
+	{{ item }}
+    {{ item.price }}
+    {{ item.description }}
+{% endblock %}

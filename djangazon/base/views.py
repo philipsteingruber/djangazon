@@ -1,5 +1,5 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
 
 from .models import *
 
@@ -19,8 +19,8 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, 'base/home.html', context=context)
 
 
-def view_item(request: HttpRequest) -> HttpResponse:
-    item = Item.objects.get(id=request.GET['pk'])
+def view_item(request: HttpRequest, pk) -> HttpResponse:
+    item = Item.objects.get(id=pk)
     context = {'item': item}
     return render(request, 'base/item.html', context=context)
 
@@ -35,4 +35,4 @@ def add_to_cart(request: HttpRequest, pk) -> HttpResponse:
         cartitem = CartItem.objects.create(cart=cart, item=item, quantity=1)
         cartitem.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect('view_item', pk=pk)

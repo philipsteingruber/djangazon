@@ -1,26 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    margin: 0;
-    font-family: sans-serif;
+    font-family: Montserrat, sans-serif;
+    color: #333
 }
 
-h1 {
-    margin-left: 1rem;
+a, a:focus, a:visited {
+    color: #333;
+}
+
+main hr {
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+}
+
+main h1 {
+    margin-left: .5rem;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+}
+
+.items-list-container ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Create 3 equal-width columns */
+    gap: 16px; /* Add space between the boxes */
+}
+
+.items-list-container li {
+    background-color: white; /* Background color for the boxes */
+    padding: 20px; /* Add padding inside each box */
+    border: 2px solid darkgray; /* Add border around each box */
+    border-radius: 5%;
+    text-align: center; /* Center the text inside the boxes */
+    margin-top: .5rem;
 }
 
 .item-image-preview {
     box-sizing: inherit;
     max-width: 200px;
     max-height: 200px;
+    padding: 1rem;
 }
 
-.home-container {
+.cart-container {
+    background: antiquewhite;
+}
+
+nav {
+    display: flex;
+}
+
+.navbar-container {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    width: 100%;
+    margin: .5rem;
 }
 
-.items-list-container ul {
-    list-style-type: none;
+.authentication-container {
+    justify-content: right;
+    text-align: right;
+    vertical-align: center;
+    width: 100%;
+}
+
+.authentication-container a {
+    margin: .5rem;
+}
+
+.categories-list-container {
+    margin: .5rem;
+}
+
+.categories-list-container li {
+    margin-top: .25rem;
+}
+
+.categories-list-container {
+    color: darkgray;
 }

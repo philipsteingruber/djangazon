@@ -6,7 +6,9 @@ from .models import *
 
 # Create your views here.
 def home(request: HttpRequest) -> HttpResponse:
-    items = Item.objects.all()
+    items = Item.objects.all().order_by('name')
+    categories = Category.objects.all()
+
     if request.user.is_authenticated:
         try:
             cart = Cart.objects.filter(user=request.user).first()
@@ -15,7 +17,7 @@ def home(request: HttpRequest) -> HttpResponse:
             items_in_cart = []
     else:
         items_in_cart = []
-    context = {'items': items, 'items_in_cart': items_in_cart}
+    context = {'items': items, 'items_in_cart': items_in_cart, 'categories': categories}
     return render(request, 'base/home.html', context=context)
 
 

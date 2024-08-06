@@ -1,12 +1,15 @@
-{% extends 'main.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/styles.css' %}">
 {% block content %}
     <div class="items-list-container">
         <ul>
             {% for item in items %}
-                <span>{{ item.name.title }} - {{ item.price }}</span>
-                <p>{{ item.description }}</p>
-                <image src="{{ item.image.url }}" class="item-image-preview"></image>
-                <hr>
+                <li>
+                    <span>{{ item.name.title }} - <em>${{ item.price }}</em></span>
+                    <image src="{{ item.image.url }}" class="item-image-preview" alt="{{ item.name }}" title="{{ item.name }}" />
+                    <hr>
+                    <p>{{ item.description }}</p>
+                </li>
             {% endfor %}
         </ul>
     </div>

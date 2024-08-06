@@ -8,7 +8,7 @@ class Item(models.Model):
     price = models.FloatField(blank=False, null=False)
     category = models.ManyToManyField('Category', blank=False)
     description = models.TextField(blank=True)
-    image = models.ImageField(default='images/imagenotfound.jpg', blank=True)
+    image = models.ImageField(default='assets/imagenotfound.jpg', blank=True)
 
     def __str__(self):
         return self.name

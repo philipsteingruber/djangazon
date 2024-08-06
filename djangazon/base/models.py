@@ -1,24 +1,31 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 # Create your models here.
 class Item(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     price = models.FloatField(blank=False, null=False)
     category = models.ManyToManyField('Category', blank=False)
     description = models.TextField(blank=True)
     image = models.ImageField(default='assets/imagenotfound.jpg', blank=True)
+    slug = models.SlugField(max_length=100, unique=True, default=slugify(name), editable=False)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name

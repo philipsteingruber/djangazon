@@ -5,10 +5,15 @@
         <ul>
             {% for item in items %}
                 <li>
-                    <span>{{ item.name.title }} - <em>${{ item.price }}</em></span>
-                    <image src="{{ item.image.url }}" class="item-image-preview" alt="{{ item.name }}" title="{{ item.name }}" />
+                    <a href="{% url 'view-item' item.slug %}">
+                        <span>{{ item.name.title }} - <em>${{ item.price }}</em></span>
+                        <image src="{{ item.image.url }}" class="item-image-preview" alt="{{ item.name }}" title="{{ item.name }}"/>
+                    </a>
                     <hr>
                     <p>{{ item.description }}</p>
+                    {% if request.user.is_authenticated %}
+                        <button class="buy-button" type="button" onclick="window.location.href='{% url 'buy-item' item.id %}';">Buy</button>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

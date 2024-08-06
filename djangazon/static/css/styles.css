@@ -4,17 +4,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
     font-family: Montserrat, sans-serif;
     color: #333
 }
 
 a, a:focus, a:visited {
     color: #333;
+}
+
+.items-list-container a, .items-list-container a:focus, .items-list-container a:visited {
+    text-decoration: none;
 }
 
 main hr {
@@ -32,20 +37,20 @@ main h1 {
 }
 
 .items-list-container ul {
-    list-style-type: none; /* Remove default bullet points */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Create 3 equal-width columns */
-    gap: 16px; /* Add space between the boxes */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px
 }
 
 .items-list-container li {
-    background-color: white; /* Background color for the boxes */
-    padding: 20px; /* Add padding inside each box */
-    border: 2px solid darkgray; /* Add border around each box */
+    background-color: white;
+    padding: 20px;
+    border: 2px solid darkgray;
     border-radius: 5%;
-    text-align: center; /* Center the text inside the boxes */
+    text-align: center;
     margin-top: .5rem;
 }
 
@@ -54,6 +59,14 @@ main h1 {
     max-width: 200px;
     max-height: 200px;
     padding: 1rem;
+}
+
+.buy-button {
+    background: cornflowerblue;
+    color: whitesmoke;
+    border-radius: 6px;
+    padding: 10px;
+    min-width: 100px;
 }
 
 .cart-container {
@@ -72,9 +85,9 @@ nav {
 }
 
 .authentication-container {
-    justify-content: right;
-    text-align: right;
-    vertical-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     width: 100%;
 }
 

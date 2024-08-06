@@ -27,11 +27,22 @@ class Category(models.Model):
 class Cart(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    items = models.ManyToManyField(Item)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
 
 
 class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     created = models.DateTimeField(auto_now_add=True)
     delivered = models.BooleanField(default=False)
-    items = models.ManyToManyField(Item)
+    delivered_date = models.DateField(blank=True, null=True)
+    items = models.ManyToManyField('CartItem')
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.item}'

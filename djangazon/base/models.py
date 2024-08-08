@@ -36,6 +36,13 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
 
+    @property
+    def total_value(self):
+        total = 0
+        for item in self.items.all():
+            total += item.quantity * item.item.price
+        return total
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
@@ -53,3 +60,7 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.item}'
+
+    @property
+    def total_value(self):
+        return round(self.quantity * self.item.price, 2)

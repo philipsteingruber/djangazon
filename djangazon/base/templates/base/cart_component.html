@@ -1,12 +1,19 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% block content %}
-    <div class="cart-container">
+    {% if request.user.is_authenticated %}
+        <div class="cart-container">
         <ul>
-            {% for item in items_in_cart %}
-                <li>{{ item }} - ${{ item.price }}</li>
-                <a href="">Remove 1</a> | <a href="">Remove all</a>  
+            {% for cart_item in items_in_cart %}
+                <li>{{ cart_item }} - ${{ cart_item.item.price }} (Total: ${{ cart_item.total_value }})</li>
+                <a href="{% url 'delete-item-from-cart' cart_item.item.id '1' %}">Remove 1</a> |
+                <a href="{% url 'delete-item-from-cart' cart_item.item.id 'all' %}">Remove all</a>
             {% endfor %}
         </ul>
-    </div>
+        <div class="cart-bottom">
+            <a href="/">Check out</a>
+            <span>Total amount: ${{ cart.total_value }}</span>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

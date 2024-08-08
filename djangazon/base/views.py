@@ -1,4 +1,4 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from .models import *
 
 
-def home(request: HttpRequest) -> HttpResponse:
+def home(request: HttpRequest, action: str = 'items') -> HttpResponse:
     items = Item.objects.all().order_by('name')
     categories = Category.objects.all()
 
@@ -14,11 +14,14 @@ def home(request: HttpRequest) -> HttpResponse:
         try:
             cart = Cart.objects.filter(user=request.user).first()
             items_in_cart = cart.items.iterator()
-        except AttributeError:
+        except Cart.DoesNotExist:
             items_in_cart = []
+            cart = Cart.objects.create(user=request.user)
+            cart.save()
     else:
         items_in_cart = []
-    context = {'items': items, 'items_in_cart': items_in_cart, 'categories': categories}
+        cart = None
+    context = {'items': items, 'items_in_cart': items_in_cart, 'categories': categories, 'cart': cart, 'action': action}
     return render(request, 'base/home.html', context=context)
 
 
@@ -66,3 +69,50 @@ def buy_item(request, pk: str) -> HttpResponse:
 def sign_out(request):
     logout(request)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def delete_item_from_cart(request, pk, amount):
+    item = Item.objects.get(id=pk)
+    cart = Cart.objects.get(user=request.user)
+    cartitem = CartItem.objects.get(item=item, cart=cart)
+
+    if amount.isdecimal():
+        amount = int(amount)
+        cartitem.quantity -= amount
+        if cartitem.quantity <= 0:
+            cartitem.delete()
+        else:
+            cartitem.save()
+    else:
+        if amount == 'all':
+            cartitem.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def user_profile(request, pk):
+    context = {'user': request.user}
+    return render(request, 'base/home.html', context=context)
+
+
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        username = request.POST.get('username').casefold()
+        password = request.POST.get('password')
+
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            return home(request, action='login')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return home(request, action='login')
+    else:
+        return home(request, action='login')

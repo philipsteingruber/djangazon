@@ -7,7 +7,7 @@
                 <li>
                     <a href="{% url 'view-item' item.slug %}">
                         <span>{{ item.name.title }} - <em>${{ item.price }}</em></span>
-                        <image src="{{ item.image.url }}" class="item-image-preview" alt="{{ item.name }}" title="{{ item.name }}"/>
+                        <image src="{{ item.image.url }}" class="item-image-preview" alt="{{ item.name }}" title="{{ item.name }}"></image>
                     </a>
                     <hr>
                     <p>{{ item.description }}</p>

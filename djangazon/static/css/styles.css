@@ -31,9 +31,19 @@ main h1 {
     margin-left: .5rem;
 }
 
+.logo-image {
+    box-sizing: inherit;
+    width: 170px;
+    height: 100px;
+}
+
 .home-container {
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
+}
+
+.items-list-container {
+    margin-bottom: 1rem;
 }
 
 .items-list-container ul {
@@ -71,6 +81,33 @@ main h1 {
 
 .cart-container {
     background: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    border-radius: .5em;
+    margin-top: .5rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    padding: .25rem;
+}
+
+.cart-container ul {
+    list-style: none;
+}
+
+.cart-container li {
+    white-space: nowrap;
+}
+
+.cart-bottom {
+    margin-top: auto;
+    margin-right: 1rem;
+    margin-bottom: .5rem;
+    justify-content: flex-end;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 nav {
@@ -82,6 +119,18 @@ nav {
     grid-template-columns: 1fr 2fr;
     width: 100%;
     margin: .5rem;
+}
+
+.login-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+}
+
+.login-form input {
+    font-size: 1.25rem;
+    display: block;
+    width: 200px;
 }
 
 .authentication-container {

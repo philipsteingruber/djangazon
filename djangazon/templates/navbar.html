@@ -1,11 +1,13 @@
 <div class="navbar-container">
-    <a href="/"><h1>Home</h1></a>
+    <a href="/"><img src="https://i.imgur.com/mcYDCro.png" alt="Djangazon Logo" title="Djangazon Logo" class="logo-image"/></a>
     <div class="authentication-container">
         {% if request.user.is_authenticated %}
+            <a href="{% url 'user-profile' request.user.id %}">Profile</a> |
             <a href="{% url "sign-out" %}">Sign Out</a>
         {% else %}
-            <a href="/">Register</a>
-            <a href="/">Sign In</a>
+            <a href="/">Register</a> |
+            <a href="{% url 'login' %}">Sign In</a>
         {% endif %}
     </div>
 </div>
+<hr>

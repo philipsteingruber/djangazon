@@ -1,0 +1,18 @@
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/styles.css' %}">
+{% block content %}
+    <form method="POST" class="login-form">
+        {% csrf_token %}
+        <label for="username">
+            Username
+            <input type="text" name="username" placeholder="Username"/>
+        </label>
+        <label for="password">
+            Password
+            <input type="password" name="password" placeholder="Password"/>
+        </label>
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

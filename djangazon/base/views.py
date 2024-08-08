@@ -8,7 +8,7 @@ from .models import *
 
 def home(request: HttpRequest, action: str = 'items') -> HttpResponse:
     items = Item.objects.all().order_by('name')
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by('name')
 
     if request.user.is_authenticated:
         try:

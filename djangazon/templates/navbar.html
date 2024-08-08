@@ -1,5 +1,5 @@
 <div class="navbar-container">
-    <a href="/"><img src="https://i.imgur.com/mcYDCro.png" alt="Djangazon Logo" title="Djangazon Logo" class="logo-image"/></a>
+    <a href="/" class="navbar-home"><h1>Home</h1></a>
     <div class="authentication-container">
         {% if request.user.is_authenticated %}
             <a href="{% url 'user-profile' request.user.id %}">Profile</a> |

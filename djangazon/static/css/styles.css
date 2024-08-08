@@ -11,7 +11,8 @@
 body {
     line-height: 1.5;
     font-family: Montserrat, sans-serif;
-    color: #333
+    color: #333;
+    background: #E3E6E6;
 }
 
 a, a:focus, a:visited {
@@ -118,7 +119,17 @@ nav {
     display: grid;
     grid-template-columns: 1fr 2fr;
     width: 100%;
-    margin: .5rem;
+    background: #131921;
+    height: 100px;
+}
+
+.navbar-home {
+    margin-left: 2rem;
+    align-content: center;
+}
+
+.navbar-container h1, .navbar-container a {
+    color: whitesmoke;
 }
 
 .login-form label {
@@ -141,15 +152,21 @@ nav {
 }
 
 .authentication-container a {
-    margin: .5rem;
+    margin: 2rem;
+    gap: .5rem;
 }
 
 .categories-list-container {
     margin: .5rem;
 }
 
+.categories-list-container ul {
+    list-style: none;
+}
+
 .categories-list-container li {
-    margin-top: .25rem;
+    margin-top: .5rem;
+    margin-left: 1rem;
 }
 
 .categories-list-container {
